@@ -15,28 +15,34 @@ const choose =()=>{
     let x = prompt("1  (signing up)  , 2   (logging in)  , or    3   (changing the password)")
     if (x == "1" ) {
         let fullName = prompt("enter your Full Name please")
-        while (!validFullName(fullName)) {
-            fullName = prompt("enter your Full Name please")
-        }
-        fullName = validFullName(fullName)
+        // while (!validFullName(fullName)) {
+        //     fullName = prompt("enter your Full Name please")
+        // }
+        // fullName = validFullName(fullName)
 
 
         let age = prompt("enter your Age please")
-        while (!validAge(age)) {
-            age =prompt("enter a valid age")
-        }
-        age = validAge(age)
+        // while (!validAge(age)) {
+        //     age =prompt("enter a valid age")
+        // }
+        // age = validAge(age)
 
 
 
         let email = prompt("enter your email please")
-        while (!validEmail(email)) {
-            email = prompt("enter your email correctly")   
-        }
-        email =  validEmail(email)
+        // while (!validEmail(email)) {
+        //     email = prompt("enter your email correctly")   
+        // }
+        // email =  validEmail(email)
 
        
         let password = prompt("enter your password please")
+        while (!validPassword(password)) {
+            password = prompt("enter valid password")
+        }
+        password = validPassword(password)
+
+
         const user = new Account(fullName ,age , email , password , [] )
         console.log(user)
         data.push(user)
@@ -63,16 +69,16 @@ function validFullName(fullName) {
  
     if (namelenght < 5) {
         alert("smya sghira 3awd dakhalha")
-        return false 
+        return  
     }
     const regex = /[^A-Za-z ]/;
     if (regex.test(fullName)) {
         alert("smya fiha caractair")
-        return false 
+        return  
     }
     if (/\d/.test(fullName)) {
         alert("smya fiha ra9em")
-        return false    
+        return     
      }
 
     return c.trim()
@@ -117,7 +123,23 @@ function validAge (age){
 
     return Number(checkage)
 }
-
+ function validPassword (password){
+    let checkpass = password.trim()
+    if (checkpass !== password || password.includes(" ")) {
+        alert("password have space at the beginning or end")
+        return
+    }
+    let cara = /[#@\-+\*/]/
+    if (!cara.test(checkpass)) {
+        alert("your password  must contain at least one special character")
+        return
+    }
+    if (password.length < 7) {
+        alert("your password must have at least 7 characters long")
+        return
+    }
+    return checkpass
+ }
 
 
 choose()
