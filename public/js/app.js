@@ -37,8 +37,13 @@ const choose =()=>{
 
        
         let password = prompt("enter your password please")
-        while (!validPassword(password)) {
+        while (!validPassword(password )) {
             password = prompt("enter valid password")
+        }
+        let confirmedPassword = prompt("confirmed yout password")
+        while (password !== confirmedPassword) {
+            alert("please enter a valid confirmation")  
+            confirmedPassword = prompt("enter a valid confirmation please") 
         }
         password = validPassword(password)
 
@@ -105,6 +110,7 @@ function validEmail(email) {
         alert("email already here")
         return
     }
+
     return checkspaces.toLowerCase()
   
 }
@@ -123,7 +129,7 @@ function validAge (age){
 
     return Number(checkage)
 }
- function validPassword (password){
+ function validPassword (password ){
     let checkpass = password.trim()
     if (checkpass !== password || password.includes(" ")) {
         alert("password have space at the beginning or end")
@@ -138,6 +144,7 @@ function validAge (age){
         alert("your password must have at least 7 characters long")
         return
     }
+  
     return checkpass
  }
 
