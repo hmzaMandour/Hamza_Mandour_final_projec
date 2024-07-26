@@ -6,25 +6,32 @@ class Account {
         this.password = password
     }
 }
-let data = []
+const user2 = new Account("hamza mandour" ,22 , "hamza12@gmail" , "password"  )
+
+let data = [user2]
 
 const choose =()=>{
 
     let x = prompt("1  (signing up)  , 2   (logging in)  , or    3   (changing the password)")
     if (x == "1" ) {
         let fullName = prompt("enter your Full Name please")
-        // while (!validFullName(fullName)) {
-        //     fullName = prompt("enter your Full Name please")
-        // }
-        // fullName = validFullName(fullName)
+        while (!validFullName(fullName)) {
+            fullName = prompt("enter your Full Name please")
+        }
+        fullName = validFullName(fullName)
 
 
-        let age = parseInt(prompt("enter your Age please"))
+        let age = prompt("enter your Age please")
+        while (!validAge(age)) {
+            age =prompt("enter a valid age")
+        }
+        age = validAge(age)
+
 
 
         let email = prompt("enter your email please")
         while (!validEmail(email)) {
-            email = prompt("enter your email without spaces")   
+            email = prompt("enter your email correctly")   
         }
         email =  validEmail(email)
 
@@ -73,15 +80,45 @@ function validFullName(fullName) {
 
 function validEmail(email) {
     let checkspaces = email.trim()
-    if (checkspaces !== email) {
-        alert("your email have spaces try again")
-        return false
-    }
+  
     if (email.includes(" ")) {
         alert("don't use spaces between words")
-        return false
+        return 
+    }
+    if (email.length <= 10) {
+        alert("your email is too short try again")
+        return 
+    }
+    let emailRegex = /^[^@]+@[^@]+$/
+    if (! emailRegex.test(email)) {
+        alert("you put more than one of (@)")
+        return
+    }
+    let exist = data.find(e=> e.email == email)
+    if (exist) {
+        alert("email already here")
+        return
     }
     return checkspaces.toLowerCase()
   
 }
+
+
+function validAge (age){
+    let checkage = age.trim()
+    if (checkage !== age || age.includes(" ")) {
+        alert("fih spaces ")
+        return 
+    }
+    if (checkage < 0 || checkage > 100) {
+        alert("your too old ")
+        return
+    }
+
+    return Number(checkage)
+}
+
+
+
 choose()
+
