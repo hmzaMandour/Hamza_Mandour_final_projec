@@ -69,6 +69,7 @@ const choose =()=>{
     }
     if (x == "3") {
         let email = prompt("enter your email now")
+        email = changePassword(email)
     }
 }
 
@@ -176,6 +177,18 @@ function validAge (age){
  }
 
 
+ function changePassword (email){
+        let findemail = data.find(e => e.email == email)
+        if (findemail) {
+            let password = prompt("enter your new password")
+            findemail.password = password
+        }else{
+            alert("go signup first")
+            return
+        }
+ }
+
+choose()
 choose()
 choose()
 
