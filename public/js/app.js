@@ -1,12 +1,13 @@
 class Account {
-    constructor(fullName , age , email , password){
+    constructor(fullName , age , email , password , balance){
         this.fullName = fullName
         this.age = age
         this.email = email
         this.password = password
+        this.balance = balance
     }
 }
-const user2 = new Account("samir ayoub" ,22 , "samir@gmail" , "password"  )
+const user2 = new Account("samir ayoub" ,22 , "samir@gmail" , "samir123" , 2000 )
 
 let data = [user2]
 
@@ -53,11 +54,13 @@ const choose =()=>{
         }
         password = validPassword(confirmedPassword)
 
+        let balance = parseInt(prompt("enter how much you wanna put in bank"))
 
-        const user = new Account(fullName ,age , email , password , [] )
+
+        const user = new Account(fullName ,age , email , password , balance )
         console.log(user)
         data.push(user)
-        console.log(data);
+        console.log(data)
     }
     if (x == "2") {
         let email = prompt("enter your valide email")
@@ -71,7 +74,37 @@ const choose =()=>{
         let email = prompt("enter your email now")
         email = changePassword(email)
     }
+
+    if (x == "4") {
+        choose()
+    }
 }
+const chooseOptints = (user) => {
+    while (true) {
+        alert(`wlcome to your account mr ${user.fullName} , your balance account have ${user.balance}`)
+        let services = prompt("you can choose a service : (logout) , (withdraw ) , (deposit) , (loan) ,(invest)")
+        if (services == "logout") {
+            alert("logout successed")
+            choose()
+        }
+        if (services == "withdraw" ) {
+            whiteDraw(user)
+        }
+        if (services == "deposit") {
+            
+        }
+        if (services == "deposit") {
+            
+        }
+        if (services == "loan") {
+            
+        }
+        if (services == "invest") {
+            
+        }
+    }
+}
+
 
 function validFullName(fullName) {
     let removespaces = fullName.trim()
@@ -166,6 +199,7 @@ function validAge (age){
         let password = prompt("enter your valide password")
         if (findEmail.password == password) {
             alert( `welcome back mr ${findEmail.fullName}`)
+            chooseOptints(findEmail)
         }else{
             alert("this password not linked with this email")
             return
@@ -188,8 +222,27 @@ function validAge (age){
         }
  }
 
-choose()
-choose()
-choose()
 
 
+
+
+
+
+
+function whiteDraw (user){
+    let whitdraw = parseInt(prompt("enter how much you wanna take from your account"))
+    if (whitdraw > user.balance) {
+        alert("you dom't have that much of money try again")
+        whitdraw= parseInt(prompt("enter how much you wanna take from your account"))
+    }
+    user.balance -= whitdraw
+    alert("You have withdraw " + whitdraw + " now your balance is " + user.balance)
+} 
+
+
+
+
+choose()
+choose()
+choose()
+choose()
