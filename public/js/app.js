@@ -240,7 +240,17 @@ function whiteDraw (user){
 } 
 
 
+function depositMoney (user){
+    let deposit = parseInt(prompt("how much you wanna depose"))
+    if (deposit > 1000 ) {
+        deposit =parseInt( prompt("how much you wanna depose and you can only depose an amount more than 1000"))
+    }
+    else{
+        user.balance += deposit
+        alert(`Deposit successful. New balance: ${user.balance} dirhams.`);
+    }
 
+}
 
 choose()
 choose()
