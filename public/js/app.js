@@ -6,34 +6,34 @@ class Account {
         this.password = password
     }
 }
-const user2 = new Account("hamza mandour" ,22 , "hamza12@gmail" , "password"  )
+const user2 = new Account("samir ayoub" ,22 , "samir@gmail" , "password"  )
 
 let data = [user2]
 
 const choose =()=>{
 
-    let x = prompt("1  (signing up)  , 2   (logging in)  , or    3   (changing the password)")
+    let x = prompt("1  (signing up)  , 2   (logging in)  , or    3   (changing the password) , 4   (exit)")
     if (x == "1" ) {
         let fullName = prompt("enter your Full Name please")
-        // while (!validFullName(fullName)) {
-        //     fullName = prompt("enter your Full Name please")
-        // }
-        // fullName = validFullName(fullName)
+        while (!validFullName(fullName)) {
+            fullName = prompt("enter your Full Name please")
+        }
+        fullName = validFullName(fullName)
 
 
         let age = prompt("enter your Age please")
-        // while (!validAge(age)) {
-        //     age =prompt("enter a valid age")
-        // }
-        // age = validAge(age)
+        while (!validAge(age)) {
+            age =prompt("enter a valid age")
+        }
+        age = validAge(age)
 
 
 
         let email = prompt("enter your email please")
-        // while (!validEmail(email)) {
-        //     email = prompt("enter your email correctly")   
-        // }
-        // email =  validEmail(email)
+        while (!validEmail(email)) {
+            email = prompt("enter your email correctly")   
+        }
+        email =  validEmail(email)
 
        
         let password = prompt("enter your password please")
@@ -41,11 +41,17 @@ const choose =()=>{
             password = prompt("enter valid password")
         }
         let confirmedPassword = prompt("confirmed yout password")
-        while (password !== confirmedPassword) {
+        let i = 0
+        while (password !== confirmedPassword && i < 3) {
             alert("please enter a valid confirmation")  
             confirmedPassword = prompt("enter a valid confirmation please") 
+            i++
+            if (i==3) {
+                alert("you are blocked")
+                return
+            }
         }
-        password = validPassword(password)
+        password = validPassword(confirmedPassword)
 
 
         const user = new Account(fullName ,age , email , password , [] )
@@ -55,7 +61,11 @@ const choose =()=>{
     }
     if (x == "2") {
         let email = prompt("enter your valide email")
-        let password = prompt("enter your valide password")
+        // let password = prompt("enter your valide password")
+        email = loginEmail(email )
+
+        // password = loginPassword(password)
+
     }
     if (x == "3") {
         let email = prompt("enter your email now")
@@ -148,6 +158,25 @@ function validAge (age){
     return checkpass
  }
 
+ function loginEmail (email ){
+    let findEmail = data.find(e => e.email == email)
+    if (findEmail) {
+        alert("email is already here")
+        let password = prompt("enter your valide password")
+        if (findEmail.password == password) {
+            alert( `welcome back mr ${findEmail.fullName}`)
+        }else{
+            alert("this password not linked with this email")
+            return
+        }
+    }else{
+        alert("we don't have this email")
+        return
+    }
+ }
+
 
 choose()
+choose()
+
 
